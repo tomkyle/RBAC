@@ -1,0 +1,22 @@
+{
+    "name":        "tomkyle/rbac",
+
+    "description": "Role-based Access Control",
+
+    "authors": [
+        {
+            "name":  "Carsten Witt",
+            "email": "tomkyl@posteo.de",
+            "role":  "Developer"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "tomkyle\\AccessControlList\\": "src/AccessControlList/",
+            "tomkyle\\Permissions\\":       "src/Permissions/",
+            "tomkyle\\Roles\\":             "src/Roles/"
+        }
+    }
+
+}
