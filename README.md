@@ -4,11 +4,6 @@ This is my role-based access control solution, extracted from my legacy codebase
 
 ##Core concepts
 
-```php
-echo $roles->contains( 2 ) ? "TRUE" : "NO";
-```
-
-
 
 ###Roles
 
