@@ -2,6 +2,8 @@
 
 This is my role-based access control solution, extracted from my legacy codebase.
 
+*Since I did not distill that mysql stuff into a proper install file yet, you will not be able to install or use it. Please wait one or two days. Thank you!*
+
 ##Core concepts
 
 
