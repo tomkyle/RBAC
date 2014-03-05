@@ -27,8 +27,8 @@ class MyUser implements RoleAwareInterface {
   use RolesAwareTrait;
 }
 
-class MyService implements PermissionsAwareInterface {
-  use PermissionsAwareTrait;
+class MyService implements AccessControlListAwareInterface {
+  use AccessControlListAwareTrait;
 }
 
 $service = new MyService;
