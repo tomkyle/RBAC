@@ -13,7 +13,7 @@ These are stored in a `RolesStorage` object that contains role IDs.
 ```php
 //namespace stuff truncated...
 $roles = new RolesStorage( 1, 2 );
-echo $roles->contains( 2 ) ? "TRUE" : "NO";
+echo $roles->contains( 2 ) ? "YES" : "NO";
 ```
 
 ###ACL
@@ -32,11 +32,12 @@ class MyService implements AccessControlListAwareInterface {
 }
 
 $service = new MyService;
+$service->setAccessControlList( new AccessControlList( 1, 2) );
 
 $user = new MyUser;
-$user->setRoles( new RolesStorage( 1, 2 ) );
+$user->setRoles( new RolesStorage( 2, 3 ) );
 
-echo $service->isAllowed( $user ) ? "TRUE" : "NO";
+echo $service->isAllowed( $user ) ? "YES" : "NO";
 ```
 
 
@@ -53,7 +54,7 @@ class MyUser implements PermissionsAwareInterface {
 
 $user = new MyUser;
 new ApplyPermissionsStorage( $user );
-echo $user->hasPermission( "my_action" ) ? "TRUE" : "NO";
+echo $user->hasPermission( "my_action" ) ? "YES" : "NO";
 ```
 
 

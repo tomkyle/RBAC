@@ -1,12 +1,14 @@
 {
     "name":        "tomkyle/rbac",
 
-    "description": "Role-based Access Control",
+    "description": "Role-based Access Control: Roles, Permissions and ACL",
+
+    "keywords":   ["rbac", "roles", "acl", "permissions", "php", "mysql"],
 
     "authors": [
         {
             "name":  "Carsten Witt",
-            "email": "tomkyl@posteo.de",
+            "email": "tomkyle@posteo.de",
             "role":  "Developer"
         }
     ],
