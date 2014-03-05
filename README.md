@@ -23,7 +23,7 @@ A service may be restricted to certain roles.
 ```php
 //namespace stuff truncated...
 
-class MyUser implements RoleAwareInterface {
+class MyUser implements RolesAwareInterface {
   use RolesAwareTrait;
 }
 
