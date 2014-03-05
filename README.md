@@ -53,7 +53,10 @@ class MyUser implements PermissionsAwareInterface {
 }
 
 $user = new MyUser;
+
+// Reads users permissions from database:
 new ApplyPermissionsStorage( $user );
+
 echo $user->hasPermission( "my_action" ) ? "YES" : "NO";
 ```
 
