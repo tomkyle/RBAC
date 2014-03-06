@@ -1,8 +1,7 @@
 #tomkyle/rbac
 
-This is my role-based access control solution, extracted from my legacy codebase.
-
-*Since I did not distill that mysql stuff into a proper install file yet, you will not be able to install or use it. Please wait one or two days. Thank you!*
+This is my role-based access control solution, extracted from my legacy codebase. 
+It provides a **permissions** and **roles** system as well as an **ACL implementation.**
 
 ##Core concepts
 
@@ -79,8 +78,9 @@ This library has no dependencies except a PDO connection. Install from command l
     }
 
 #####MySQL
-TBD: I'll prepare and deliver a MySQL dump as soon as possible.
+This package comes with two MySQL dumps, `install.sql.dist` and `install.sample-data.sql.dist`. Simply execute their contents; former installs tables, indices and unique constraints, dropping existing tables; latter adds sample data. See comments in table info or field comments. 
 
+The databasa schema uses InnoDB tables for better transaction and relation handling, although currently not using these features I never have worked with yet.
 
 
 ##Database
@@ -95,4 +95,4 @@ Roles, Permissions and their respective associations to clients are stored in a 
 | tomkyle_clients_permissions_adjust | Adjusts a clients' permissions, overriding the ones he is granted or permitted due to his roles |
 
 ##Administration
-Sorry, currently there is no administration tool available. I used to manage them manually in the database…
+Sorry, currently there is no administration tool available. I used to manage them manually in the database. Anyhow, `unique` constraints will prevent you from adding doublettes. So if you have to delete a certain role or permission, do not forget the relation tables that refer to their primary key.
