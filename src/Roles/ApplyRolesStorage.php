@@ -41,6 +41,8 @@ class ApplyRolesStorage
      * @param RolesAwareInterface   $client        Client that can have roles.
      * @param PDO                   $pdo           Database connection
      * @param RolesStorageInterface $roles_storage Optional: Predefined RolesStorage
+     *
+     * @throws RuntimeException If in PDO::ERRMODE_SILENT and error occured in PDO execution
      */
     public function __construct(RolesAwareInterface $client, \PDO $pdo, RolesStorageInterface $roles_storage = null)
     {
@@ -62,9 +64,15 @@ class ApplyRolesStorage
         // PDO magic
         $stmt = $pdo->prepare( $sql );
 
-        $bool = $stmt->execute([
+        $stmt->execute([
           'client_id' => $client->getId()
         ]);
+
+        // Catch errors, throw RuntimeException.
+        if( $stmt->errorCode() != 0 ) {
+            $errors = $stmt->errorInfo();
+            throw new \RuntimeException( "SQLSTATE[{$errors[0]}]: {$errors[2]}" );
+        }
 
         // Retrieve client's Roles
         // and append found role IDs to RolesStorage
