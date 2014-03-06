@@ -56,6 +56,8 @@ class AllRolesFactory
      *
      * @param PDO   $pdo   PDO Connection
      * @param array $roles Optional: Role Presets
+     *
+     * @throws RuntimeException If in PDO::ERRMODE_SILENT and error occured in PDO execution
      */
     public function __construct( \PDO $pdo, $roles = array())
     {
@@ -71,7 +73,13 @@ class AllRolesFactory
         WHERE 1';
 
         $stmt = $pdo->prepare( $sql );
-        $bool = $stmt->execute();
+        $stmt->execute();
+
+        // Catch errors, throw RuntimeException.
+        if( $stmt->errorCode() != 0 ) {
+            $errors = $stmt->errorInfo();
+            throw new \RuntimeException( "SQLSTATE[{$errors[0]}]: {$errors[2]}" );
+        }
 
         // Retrieve client's Roles
         // and configure Roles ArrayObject

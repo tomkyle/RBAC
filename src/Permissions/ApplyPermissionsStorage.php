@@ -44,6 +44,8 @@ class ApplyPermissionsStorage
      * @param PermissionsAwareInterface   $client
      * @param PDO                    $pdo PDO Database connection
      * @param PermissionsStorageInterface $permissions_storage Optional: Predefined PermissionsStorage
+     *
+     * @throws RuntimeException If in PDO::ERRMODE_SILENT and error occured in PDO execution
      */
     public function __construct(PermissionsAwareInterface $client, \PDO $pdo, PermissionsStorageInterface $permissions_storage = null)
     {
@@ -91,14 +93,21 @@ class ApplyPermissionsStorage
 
         // PDO magic
         $stmt = $pdo->prepare( $sql );
-        $bool = $stmt->execute([
+        $stmt->execute([
           'client_id' => $client->getId()
         ]);
+
+        // Catch errors, throw RuntimeException.
+        if( $stmt->errorCode() != 0 ) {
+            $errors = $stmt->errorInfo();
+            throw new \RuntimeException( "SQLSTATE[{$errors[0]}]: {$errors[2]}" );
+        }
 
         // Configure PermissionsStorage
         while ( $right = $stmt->fetch( \PDO::FETCH_OBJ ) ) {
             $permissions_storage->offsetSet($right->permission_name, $right->hasPermission);
         }
+
 
         // Apply to given client
         $client->setPermissions( $permissions_storage );
