@@ -80,7 +80,7 @@ This library has no dependencies except a PDO connection. Install from command l
 #####MySQL
 This package comes with two MySQL dumps, `install.sql.dist` and `install.sample-data.sql.dist`. Simply execute their contents; former installs tables, indices and unique constraints, dropping existing tables; latter adds sample data. See comments in table info or field comments. 
 
-The databasa schema uses InnoDB tables for better transaction and relation handling, although currently not using these features I never have worked with yet.
+The databasa schema uses InnoDB tables for better transaction and relation handling, although currently not using these features (since I never have worked with it yet).
 
 
 ##Database
