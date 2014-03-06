@@ -4,6 +4,7 @@
 Release Date: 2014/03/06
 
 - Classes using PDO now throw RuntimeException on PDO error, providing SQLSTATE error code and driver message.
+- Tweaked `composer.json`
 
 ##1.0.2
 Release Date: 2014/03/06
