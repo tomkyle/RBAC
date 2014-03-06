@@ -5,6 +5,8 @@
 
     "keywords":   ["rbac", "roles", "acl", "permissions", "php", "mysql"],
 
+    "license": "MIT",
+
     "authors": [
         {
             "name":  "Carsten Witt",
@@ -12,6 +14,10 @@
             "role":  "Developer"
         }
     ],
+
+    "require": {
+        "php": ">=5.4.0",
+    },
 
     "autoload": {
         "psr-4": {
