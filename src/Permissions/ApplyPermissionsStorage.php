@@ -82,7 +82,7 @@ class ApplyPermissionsStorage
                 R.permission_name,
                 URA.permission_adjust AS hasPermission
                 FROM tomkyle_permissions R,
-                     tomkyle_clients_rights_adjust URA
+                     tomkyle_clients_permissions_adjust URA
                 WHERE   R.id = URA.permission_id
                 AND     URA.client_id = :client_id
             )

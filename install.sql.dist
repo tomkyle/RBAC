@@ -1,0 +1,113 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4096
+#
+# http://www.sequelpro.com/
+# http://code.google.com/p/sequel-pro/
+#
+# Host: 127.0.0.1 (MySQL 5.5.35-0ubuntu0.13.10.2-log)
+# Datenbank: moin
+# Erstellungsdauer: 2014-03-06 10:30:51 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Export von Tabelle tomkyle_clients_permissions_adjust
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tomkyle_clients_permissions_adjust`;
+
+CREATE TABLE `tomkyle_clients_permissions_adjust` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` int(11) unsigned NOT NULL COMMENT 'PK of client',
+  `permission_id` int(11) unsigned NOT NULL COMMENT 'PK of permission',
+  `permission_adjust` int(2) DEFAULT NULL COMMENT '1 granted, -1 not granted',
+  `info` varchar(64) DEFAULT '' COMMENT 'Short comment on What and Why',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_pairing` (`client_id`,`permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table adjusts a clients'' permissions he has as a result of the roles he is associated with, i.e.:\nIf a role allows doing something, and a user belongs to that role, with this table this permission can be revoked for him. \nVice versa, if a user is not allowed to perform an action due to his roles, this action can be granted exclusively for this user.';
+
+
+
+# Export von Tabelle tomkyle_clients_roles_mm
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tomkyle_clients_roles_mm`;
+
+CREATE TABLE `tomkyle_clients_roles_mm` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'PK of client',
+  `role_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'PK of role',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_user_usergroup` (`client_id`,`role_id`),
+  KEY `index_user_id` (`client_id`),
+  KEY `index_usergroup` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table associates a client to one or many roles. In most cases, these will be your app users, use their primary key as client ID.';
+
+
+
+# Export von Tabelle tomkyle_permissions
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tomkyle_permissions`;
+
+CREATE TABLE `tomkyle_permissions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',
+  `permission_name` varchar(128) NOT NULL DEFAULT '' COMMENT 'The permission name',
+  `permission_description` mediumtext COMMENT 'A textual description what this permission is meant for',
+  `info` varchar(128) DEFAULT NULL COMMENT 'Info about scope, meaning etc.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_permission` (`permission_name`),
+  KEY `index_permission` (`permission_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table holds the permissions the application works with.';
+
+
+
+# Export von Tabelle tomkyle_permissions_roles_mm
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tomkyle_permissions_roles_mm`;
+
+CREATE TABLE `tomkyle_permissions_roles_mm` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `permission_id` int(11) unsigned NOT NULL COMMENT 'PK of permisson',
+  `role_id` int(11) unsigned NOT NULL COMMENT 'PK of role',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_pairing` (`permission_id`,`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table assigns permissions to one or many roles.';
+
+
+
+# Export von Tabelle tomkyle_roles
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tomkyle_roles`;
+
+CREATE TABLE `tomkyle_roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'PK',
+  `role_short_name` varchar(255) DEFAULT NULL COMMENT 'Role short name, to be used in code',
+  `role_display_name` varchar(255) DEFAULT NULL COMMENT 'What should be displayed on screen (readability)',
+  `info` varchar(256) DEFAULT NULL COMMENT 'Some info about scope or what the role belongs to',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_short_name` (`role_short_name`),
+  UNIQUE KEY `unique_display_name` (`role_display_name`),
+  KEY `index_short_name` (`role_short_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table defines all roles (or better known as "user groups") the application works with. Use table "tomkyle_clients_roles_mm" to associate your users with these roles.';
+
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
