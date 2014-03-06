@@ -92,7 +92,7 @@ Roles, Permissions and their respective associations to clients are stored in a 
 | tomkyle_permissions | Holds  permissions the application works with.|
 | tomkyle_permissions_roles_mm | Associates permissions with one or many roles. |
 | tomkyle_clients_roles_mm | Associates a client with one or many roles.|
-| tomkyle_clients_rights_adjust | Adjusts a clients' permissions, overriding the ones he is granted or permitted due to his roles |
+| tomkyle_clients_permissions_adjust | Adjusts a clients' permissions, overriding the ones he is granted or permitted due to his roles |
 
 ##Administration
 Sorry, currently there is no administration tool available. I used to manage them manually in the database…
