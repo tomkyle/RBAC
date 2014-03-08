@@ -1,7 +1,9 @@
 #tomkyle/rbac
 
-This is my role-based access control solution, extracted from my legacy codebase. 
+Role-based access control solution, extracted from my legacy codebase. 
 It provides a **permissions** and **roles** system as well as a simple **ACL implementation.**
+
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/tomkyle/RBAC/badges/quality-score.png?s=58b756b227576429ae7c237aac26a4440a305004)](https://scrutinizer-ci.com/g/tomkyle/RBAC/)
 
 ##Core concepts
 
