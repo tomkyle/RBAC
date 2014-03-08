@@ -1,5 +1,19 @@
 #Changelog
 
+##1.0.6
+Release Date: 2014/03/08
+
+- Added Scrutinizer badge
+
+
+##1.0.5
+Release Date: 2014/03/08
+
+- Moved SQL dumps into own folder
+
+##1.0.4
+- Forgot ;-)
+
 ##1.0.3
 Release Date: 2014/03/06
 
