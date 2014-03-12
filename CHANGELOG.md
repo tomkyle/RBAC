@@ -1,5 +1,10 @@
 #Changelog
 
+##1.0.7
+Release Date: 2014/03/12
+
+- Added namespaces to README code examples
+
 ##1.0.6
 Release Date: 2014/03/08
 

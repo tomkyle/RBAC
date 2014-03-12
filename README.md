@@ -14,7 +14,9 @@ A client may be associated with certain roles, e.g. *Authors* or *Admins*.
 These are stored in a `RolesStorage` object that contains role IDs.
 
 ```php
-//namespace stuff truncated...
+<?php
+use \tomkyle\Roles\RolesStorage;
+
 $roles = new RolesStorage( 1, 2 );
 echo $roles->contains( 2 ) ? "YES" : "NO";
 ```
@@ -24,7 +26,11 @@ A service may be restricted to certain roles.
 `AccessControlList` as an extension of `RolesStorage` will do that:
 
 ```php
-//namespace stuff truncated...
+<?php
+use \tomkyle\Roles\RolesStorage;
+use \tomkyle\Roles\RolesAwareInterface;
+use \tomkyle\AccessControlList\AccessControlList;
+use \tomkyle\AccessControlList\AccessControlListAwareInterface;
 
 class MyUser implements RolesAwareInterface {
   use RolesAwareTrait;
@@ -49,7 +55,10 @@ A client may be allowed or disallowed to do certain things.
 `PermissionsStorage` will do that:
 
 ```php
-//namespace stuff truncated...
+<?php
+use \tomkyle\Permissions\PermissionsAwareInterface;
+use \tomkyle\Permissions\PermissionsAwareTrait;
+use \tomkyle\Permissions\ApplyPermissionsStorage;
 
 class MyUser implements PermissionsAwareInterface {
   use PermissionsAwareTrait;
